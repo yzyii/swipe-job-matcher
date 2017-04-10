@@ -1,0 +1,30 @@
+jobsAPIAddress: http://test.swipejobs.com/api/jobs
+workersAPIAddress: http://test.swipejobs.com/api/workers
+
+server:
+  applicationConnectors:
+  - type: http 
+    port: 8080
+  adminConnectors:
+  - type: http
+    port: 8081
+
+logging:
+  level: INFO
+  appenders:
+    - type: file
+      currentLogFilename: ./logs/jobmatcher.log
+      threshold: ALL
+      archive: true
+      archivedLogFilenamePattern: ./logs/jobmatcher-%d.log.gz
+      archivedFileCount: 5
+      timeZone: UTC
+
+jerseyClient:
+  minThreads: 1
+  maxThreads: 128
+  workQueueSize: 8
+  gzipEnabled: false
+  gzipEnabledForRequests: false
+  chunkedEncodingEnabled: false
+  timeout: 5s
